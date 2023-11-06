@@ -9,6 +9,16 @@ class IceCreamInline(admin.StackedInline):
     extra = 0
 
 class CategoryAdmin(admin.ModelAdmin):
+    list_display = (
+        'title',
+        'slug',
+        'output_order'
+    )
+    list_editable = (
+        'slug',
+        'output_order'
+    )
+    list_display_links=('title',)
     inlines = (
         IceCreamInline,
     )
@@ -20,12 +30,14 @@ class IceCreamAdmin(admin.ModelAdmin):
         'is_published',
         'is_on_main',
         'category',
-        'wrapper'
+        'wrapper',
+        'output_order'
     )
     list_editable = (
         'is_published',
         'is_on_main',
-        'category'
+        'category',
+        'output_order'
     )
     search_fields = ('title',)
     list_filter = ('category',)

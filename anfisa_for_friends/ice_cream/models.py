@@ -42,6 +42,8 @@ class Wrapper(PublishedModel):
 class IceCream(PublishedModel):
     title = models.CharField(max_length=256, verbose_name='Название')
     description = models.TextField(verbose_name='Описание')
+    output_order = models.PositiveSmallIntegerField(default=100, verbose_name='Порядок отображения')
+    price = models.DecimalField(max_digits=5, decimal_places=2, default=0)
     wrapper = models.OneToOneField(
         Wrapper,
         on_delete=models.SET_NULL,
@@ -62,6 +64,8 @@ class IceCream(PublishedModel):
     class Meta:
         verbose_name = 'Мороженое'
         verbose_name_plural = 'Мороженые'
+        
+        ordering = ('output_order', 'title')
 
     def __str__(self) -> str:
         return self.title
